@@ -1,4 +1,4 @@
-#include  "AST.h"
+#include "AST.h"
 #include <QDebug>
 #include <QAbstractItemModel>
 
@@ -15,7 +15,7 @@ void ObjectTreeModel::setColumns(QStringList cols)
 
 void ObjectTreeModel::addItem(QObject *item, const QModelIndex &parentIdx)
 {
-    beginInsertRows(parentIdx, rowCount(parenIdx), rowCount(parentIdx));
+    beginInsertRows(parentIdx, rowCount(parentIdx), rowCount(parentIdx));
     item->setParent(objByIndex(parentIdx));
     endInsertRows();
 }
@@ -37,11 +37,11 @@ QModelIndex ObjectTreeModel::index(int row, int column, const QModelIndex &paren
 
 QModelIndex ObjectTreeModel::parent(const QModelIndex &child) const
 {
-    QObject* childObj = objIndex(child);
-    QOblect* parentObj = childObj->parent();
+    QObject* childObj = objByIndex(child);
+    QObject* parentObj = childObj->parent();
     if (parentObj == _rootItem)
         return QModelIndex();
-    QOblject* grandParentObj = parentObj->parent();
+    QObject* grandParentObj = parentObj->parent();
     int row = grandParentObj->children().indexOf(parentObj);
     return createIndex(row, 0, parentObj);
 }
@@ -61,7 +61,7 @@ QVariant ObjectTreeModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
         return QVariant();
-    if (role == QT::DisplayRole) {
+    if (role == Qt::DisplayRole) {
         return objByIndex(index)->property(_columns.at(index.column()).toUtf8());
     }
     return QVariant();
