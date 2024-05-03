@@ -20,7 +20,9 @@ enum NodeT {
   NT_INIT_LIST,
   NT_IDENT,
   NT_VARDECL,
-  NT_CALCLIST
+  NT_CALCLIST,
+  NT_IFELSE,
+  NT_COND
 };
 struct AST_base{
     int nodetype;

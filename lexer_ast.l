@@ -24,34 +24,46 @@ types "i8"|"u8"|"i16"|"u16"|"i32"|"u32"|"i64"|"u64"|"i128"|"u128"|"isize"|"usize
 "|" |
 "(" |
 ";" |
+"{" |
+"}" |
 ")" { return yytext[0]; }
 
-[0-9]+"."[0-9]*{EXP}?|"."?[0-9]+{EXP}? { yylval.d = yytext; return NUMBER; }
-
+[0-9]+ {
+        char* ch1 = (char*)malloc(strlen(yytext) * sizeof(char));
+        strncpy(ch1, yytext, strlen(yytext));
+        yylval.d = ch1; return NUMBER;
+       }
 
 let			{
                 printf("LET\n");
                 //yylval.d = yytext;
                 return VARDECL;
             }
+"if"        {
+                return IFTOK;
+            }
+"else"      {
+                return ELSETOK;
+            }
 
 
 
-
-{identif}		{
+[_a-zA-Z][_a-zA-Z0-9]*	{
                 printf("IDENTIFIER\n");
-                yylval.d = yytext;
+                char* ch1 = (char*)malloc(strlen(yytext) * sizeof(char));
+                strncpy(ch1, yytext, strlen(yytext));
+                yylval.d = ch1;
                 std::cout << "ident:  " << yylval.d << std::endl;
                 return IDENTIFIER;
             }
 
 
-"="			{
+"="   		{
                 printf("ASSIGNMENT\n");
                 yylval.d=yytext;
                 return yytext[0];
             }
 
-\n          { return EOL; }
+"\n"      { std::cout << "EOL\n" << std::endl; return EOL; }
 [ \t]+			/*ignored*/;
 %%

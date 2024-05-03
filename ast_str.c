@@ -9,7 +9,7 @@ int yyparse(void);
 /* is the operator to create a subtree */
 std::ostream& operator<<(std::ostream& ost, const AST_leaf& nd)
 {
-    ost << "\tLEAF, nodetype: " << nd.nodetype << ";   value: " << nd.value << ";" << std::endl;
+    ost << "\tLEAF, nodetype: " << nd.nodetype << ";   value: " << nd.value << " that's all"<< std::endl;
     return ost;
 }
 
@@ -26,6 +26,7 @@ std::ostream& operator<<(std::ostream& ost, const AST_node& nd)
         }
 
     }
+    std::cout << "**********************************************" << std::endl;
     return ost;
 }
 
