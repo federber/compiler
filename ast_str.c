@@ -17,7 +17,10 @@ std::ostream& operator<<(std::ostream& ost, const AST_node& nd)
 {
     ost << "NODE, nodetype: " << nd.nodetype << std::endl;
     ost << "SUBTREES: " << std::endl;
-    for(auto el : nd.subtrees){
+    if(nd.subtrees[0] != nullptr){std::cout << "prev: " << nd.subtrees[0]->nodetype  << ";" << std::endl; } else {std::cout << "no_prev" << std::endl;}
+    for(int i = 1; i < nd.subtrees.size();++i){
+        auto el = nd.subtrees[i];
+        if (el->nodetype == NT_NULL) {ost << "wtht parameters" << std::endl; }
         if(el->nodetype == NT_NUM or el->nodetype == NT_IDENT)
             ost << *(AST_leaf*)el;
         else {

@@ -8,21 +8,30 @@ extern int yylineno;
 void yyerror(char *s, ...);
 
 enum NodeT {
-  NT_NUM,
-  NT_UNDEF,
-  NT_ADD,
-  NT_SUB,
-  NT_MUL,
-  NT_DIV,
-  NT_ABS,
-  NT_NEG,
-  NT_ASSIGN,
-  NT_INIT_LIST,
-  NT_IDENT,
-  NT_VARDECL,
-  NT_CALCLIST,
-  NT_IFELSE,
-  NT_COND
+    NT_NUM,
+    NT_UNDEF,
+    NT_ADD,
+    NT_SUB,
+    NT_MUL,
+    NT_DIV,
+    NT_ABS,
+    NT_NEG,
+    NT_ASSIGN,
+    NT_INIT_LIST,
+    NT_IDENT,
+    NT_VARDECL,
+    NT_CALCLIST,
+    NT_IFELSE,
+    NT_COND,
+    NT_FNDECL,
+    NT_DATA_TYPE,
+    NT_TYPED_VAR,
+    NT_IL_conc,
+    NT_FN_CALL,
+    NT_COMPARE,
+    NT_NOT,
+    NT_LOOP,
+    NT_NULL
 };
 struct AST_base{
     int nodetype;
