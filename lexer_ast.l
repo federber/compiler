@@ -1,9 +1,27 @@
-%option noyywrap
 
 %{
 #include "ast_str.h"
 #include "create_ast.tab.h"
 extern "C" int yylex();
+//extern "C" YY_INPUT();
+extern "C" int yywrap();
+int yywrap()
+{
+    return 1;
+}
+
+extern std::string input_value;
+#ifndef YY_INPUT
+#define YY_INPUT(buf,result,max_size) \
+        char c; \
+        size_t n; \
+        for ( n =0; n < max_size && (c = input_value[n] ) != '\n' && n < input_value.length(); ++n ) \
+            buf[n] = c; \
+        if ( c == '\n' ) \
+            buf[n++] = c; \
+        result = n; \
+        input_value = ""
+#endif
 %}
 
 EXP ([Ee][-+]?[0-9]+)
@@ -39,7 +57,7 @@ compare "=="|">"|"<"|">="|"<="
         //yylval.d = yytext;
         return NUMBER;
        }
-END {return END;}
+"END"        {return END;}
 let			{
                 printf("LET\n");
                 //yylval.d = yytext;
@@ -94,7 +112,7 @@ let			{
                 //yylval.d=yytext;
                 return yytext[0];
             }
-
 "\n"      { std::cout << "EOL\n" << std::endl; /*return EOL;*/ }
+
 [ \t]+			/*ignored*/;
 %%
