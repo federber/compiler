@@ -9,29 +9,28 @@ void yyerror(char *s, ...);
 #define NodeT_CONSTANT 4 // первые <NodeT_CONSTANT> членов enum NodeT могут использоваться в AST_leaf,
                          //остальные - в AST_node. Введение константы помогает проще различать листья и узлы.
 enum NodeT {
-    NT_NUM,
-    NT_COMPARE,
-    NT_IDENT,
-    NT_DATA_TYPE,
-    NT_ADD,
-    NT_SUB,
-    NT_MUL,
-    NT_DIV,
-    NT_ABS,
-    NT_NEG,
-    NT_ASSIGN,
-    NT_INIT_LIST,
-    NT_VARDECL,
-    NT_CALCLIST,
-    NT_IFELSE,
-    NT_COND,
-    NT_FNDECL,
-    NT_TYPED_VAR,
-    NT_IL_conc,
-    NT_FN_CALL,
-    NT_NOT,
-    NT_LOOP,
-    NT_NULL
+    NT_NUM, // число
+    NT_COMPARE, // символ сравнения(<,>,==,<=,>=)
+    NT_IDENT, // идентификатор переменной/функции
+    NT_DATA_TYPE, // название типа данных
+    NT_ADD, //сложение
+    NT_SUB, // вычитание
+    NT_MUL, // умножение
+    NT_DIV, // деление
+    NT_ABS, // модуль
+    NT_NEG, // отрицательное число
+    NT_ASSIGN, // присваивание
+    NT_INIT_LIST, // список инициализации
+    NT_VARDECL, // объявление переменной (начинается с let)
+    NT_IFELSE, // конструкция if-else
+    NT_COND, // сравнение (a>=b)
+    NT_FNDECL, // объявление функции
+    NT_TYPED_VAR, // при объявлении функции x: i32
+    NT_IL_conc, // при объявлении функции список входных параметров
+    NT_FN_CALL, // вызов функции (не обязательно оканчивается на ; может и вызов в выражении)
+    NT_NOT, // логическое отрицание
+    NT_LOOP, // цикл
+    NT_NULL // пустой узел(без свойств)
 };
 struct AST_base{
     int nodetype;
