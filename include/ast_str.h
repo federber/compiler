@@ -50,4 +50,7 @@ std::ostream& operator<<(std::ostream& ost, const AST_node& nd);
 AST_node *newast(int nodetype, std::vector<AST_base*> vec);
 
 AST_leaf *newleaf(int nodetype, char* chr);
+void print_tree(AST_node* start_node);
+AST_node* get_AST(std::string code_buffer);
+AST_node* find_start_symbol(AST_node* last_symb);
 #endif

@@ -100,21 +100,13 @@ AST_node* get_AST(std::string code_buffer)
     yyparse();
     return find_start_symbol((AST_node*)last_node);
 }
-
+/* example uf using get_AST
 int main() {
   printf(">>> ");
   std::string a;
   a = "let r=9; if a==e {a=ss; let r=p;} else {let a=c;}";
-  /*
-  yyparse();
-  std::cout << "LAST NODE: \n\n\n";
-  //std::cout << *(AST_node*)last_node << std::endl;
-  std::cout << "START NODE: \n\n\n";
-  auto start_node = find_start_symbol((AST_node*)last_node);
-  std::cout << *start_node << std::endl;
-  //print_tree(start_node);
-  */
   std::cout << *get_AST(a);
 }
+*/
 
 
