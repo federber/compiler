@@ -45,12 +45,12 @@ struct AST_node:public AST_base{
     AST_base* prev = nullptr; //указатель на предыд. узел (подробнее - см. readme)
     AST_base* next = nullptr; //указатель на след. узел
 };
-std::ostream& operator<<(std::ostream& ost, const AST_node& nd);
+std::ostream& operator<<(std::ostream& ost, const AST_node& nd); // выведет всё дерево начивая с узла(т.е. сам узел и дочерние ноды)
 
-AST_node *newast(int nodetype, std::vector<AST_base*> vec);
+AST_node *newast(int nodetype, std::vector<AST_base*> vec); // создать новый узел
 
-AST_leaf *newleaf(int nodetype, char* chr);
-void print_tree(AST_node* start_node);
-AST_node* get_AST(std::string code_buffer);
-AST_node* find_start_symbol(AST_node* last_symb);
+AST_leaf *newleaf(int nodetype, char* chr); // создать новый лист
+void print_tree(AST_node* start_node); // вывести дерево, начиная с указанного узла (равносильно выводу узла в поток)
+AST_node* get_AST(std::string code_buffer); // получить AST дерево из std::string
+AST_node* find_start_symbol(AST_node* last_symb); // подняться из узла в корень дерева
 #endif

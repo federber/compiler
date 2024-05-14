@@ -50,17 +50,15 @@ compare "=="|">"|"<"|">="|"<="
 "!" |
 ")" { return yytext[0]; }
 
-[0-9]+ {
-        char* ch1 = (char*)calloc(strlen(yytext),sizeof(char));
-        strncpy(ch1, yytext, strlen(yytext));
-        yylval.d = ch1;
-        //yylval.d = yytext;
-        return NUMBER;
-       }
-"END"        {return END;}
+[0-9]+      {
+                char* ch1 = (char*)calloc(strlen(yytext),sizeof(char));
+                strncpy(ch1, yytext, strlen(yytext));
+                yylval.d = ch1;
+                return NUMBER;
+            }
+"END"       {return END;}
 let			{
                 printf("LET\n");
-                //yylval.d = yytext;
                 return VARDECL;
             }
 "if"        {
@@ -91,14 +89,11 @@ let			{
                 char* ch1 = (char*)calloc(strlen(yytext),sizeof(char));
                 strncpy(ch1, yytext, strlen(yytext));
                 yylval.d = ch1;
-                //yylval.d = yytext;
                 return COMPARE_TOK;
             }
 [_a-zA-Z][_a-zA-Z0-9]*	{
                 printf("IDENTIFIER\n");
-                //free(yylval.d);
                 char* ch1 = (char*)calloc(strlen(yytext),sizeof(char));
-                //(char*)realloc(yylval.d, strlen(yytext) * sizeof(char));
                 strncpy(ch1, yytext, strlen(yytext));
                 yylval.d = ch1;
                 std::cout << "ident:  " << yylval.d << std::endl;
@@ -108,11 +103,10 @@ let			{
 
 
 "="   		{
-                printf("ASSIGNMENT\n");
-                //yylval.d=yytext;
+                //printf("ASSIGNMENT\n");
                 return yytext[0];
             }
-"\n"      { std::cout << "EOL\n" << std::endl; /*return EOL;*/ }
+"\n"        { std::cout << "EOL\n" << std::endl; /*return EOL;*/ }
 
 [ \t]+			/*ignored*/;
 %%

@@ -23,10 +23,6 @@ std::ostream& operator<<(std::ostream& ost, const AST_node& nd)
     ost << "\nNODE, nodetype: " << nd.nodetype << std::endl;
     ost << "SUBTREES: " << std::endl;
     std::cout << "size: " << nd.subtrees.size() << std::endl;
-    /*
-    if ((AST_node*)nd.prev != nullptr)
-        ost << "~~~~~~~~~prev~~~~~~~~\n"  << *(AST_node*)nd.prev << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-        */
 
     if ((AST_node*)nd.next != nullptr)
         ost << "~~~~~~~~~next~~~~~~~~\n"  << *(AST_node*)nd.next << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
@@ -40,10 +36,6 @@ std::ostream& operator<<(std::ostream& ost, const AST_node& nd)
                 continue;
             }
             ost << *(AST_node*)el;
-
-
-
-
         }
     else {ost << "wtht parameters" << std::endl; }
     ost << std::endl << "================================================" << std::endl;
