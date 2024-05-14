@@ -15,9 +15,6 @@ extern AST_base* last_node;
 %token <d> NUMBER IDENTIFIER DATA_TYPE COMPARE_TOK LOOP_TOK
 %token VARDECL IFTOK ELSETOK FNDECL
 
-
-%token EOL END
-
 %type <a> exp factor term var_declaration assign if_else condition commands init_list fn_decl var_type fn_call IL_conc loop
 
 %%
@@ -58,12 +55,6 @@ commands:
     {
         ((AST_node*)$1)->next = $2;
         ((AST_node*)$2)->prev = $1;
-        $$ = $1;
-        last_node = $$;
-    }
-    | commands END
-    {
-        //std::cout << "COMMANDS END" << std::endl;
         $$ = $1;
         last_node = $$;
     }

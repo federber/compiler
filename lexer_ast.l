@@ -56,7 +56,6 @@ compare "=="|">"|"<"|">="|"<="
                 yylval.d = ch1;
                 return NUMBER;
             }
-"END"       {return END;}
 let			{
                 printf("LET\n");
                 return VARDECL;
