@@ -30,7 +30,9 @@ enum NodeT {
     NT_FN_CALL, // вызов функции (не обязательно оканчивается на ; может и вызов в выражении)
     NT_NOT, // логическое отрицание
     NT_LOOP, // цикл
-    NT_NULL // пустой узел(без свойств)
+    NT_NULL, // пустой узел(без свойств)
+    NT_ININT,
+    NT_INTERV
 };
 struct AST_base{
     int nodetype;

@@ -13,6 +13,7 @@ ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
  add_executable(Foo
     ./src/ast_str.cpp
+    ./src/ast_test.cpp
     ${BISON_MyParser_OUTPUTS}
     ${FLEX_MyScanner_OUTPUTS}
  )

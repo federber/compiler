@@ -48,6 +48,7 @@ compare "=="|">"|"<"|">="|"<="
 "," |
 ":" |
 "!" |
+"." |
 ")" { return yytext[0]; }
 
 [0-9]+      {
@@ -57,7 +58,7 @@ compare "=="|">"|"<"|">="|"<="
                 return NUMBER;
             }
 let			{
-                printf("LET\n");
+                //printf("LET\n");
                 return VARDECL;
             }
 "if"        {
@@ -77,11 +78,11 @@ let			{
             }
 
 {types}     {
-                printf("data_type\n");
+                //printf("data_type\n");
                 char* ch1 = (char*)calloc(strlen(yytext),sizeof(char));
                 strncpy(ch1, yytext, strlen(yytext));
                 yylval.d = ch1;
-                std::cout << "data_type:  " << yylval.d << std::endl;
+                //std::cout << "data_type:  " << yylval.d << std::endl;
                 return DATA_TYPE;
             }
 {compare}   {
@@ -90,12 +91,15 @@ let			{
                 yylval.d = ch1;
                 return COMPARE_TOK;
             }
+"in"        {
+                return IN_TOK;
+            }
 [_a-zA-Z][_a-zA-Z0-9]*	{
-                printf("IDENTIFIER\n");
+                //printf("IDENTIFIER\n");
                 char* ch1 = (char*)calloc(strlen(yytext),sizeof(char));
                 strncpy(ch1, yytext, strlen(yytext));
                 yylval.d = ch1;
-                std::cout << "ident:  " << yylval.d << std::endl;
+                //std::cout << "ident:  " << yylval.d << std::endl;
                 return IDENTIFIER;
             }
 
@@ -105,7 +109,7 @@ let			{
                 //printf("ASSIGNMENT\n");
                 return yytext[0];
             }
-"\n"        { std::cout << "EOL\n" << std::endl; /*return EOL;*/ }
+"\n"        {}
 
 [ \t]+			/*ignored*/;
 %%

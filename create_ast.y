@@ -13,9 +13,10 @@ extern AST_base* last_node;
     char* d;
 }
 %token <d> NUMBER IDENTIFIER DATA_TYPE COMPARE_TOK LOOP_TOK
-%token VARDECL IFTOK ELSETOK FNDECL
+%token VARDECL IFTOK ELSETOK FNDECL IN_TOK
 
-%type <a> exp factor term var_declaration assign if_else condition commands init_list fn_decl var_type fn_call IL_conc loop
+%type <a> exp factor term var_declaration assign if_else condition commands init_list fn_decl var_type fn_call IL_conc loop interv in_interv
+
 
 %%
 
@@ -31,14 +32,16 @@ commands:
         //std::cout << "IFELSE_COMMA" << std::endl;
         ((AST_node*)$1)->next = $2;
         //std::cout << "NEXT: \n" << *(AST_node*)(((AST_node*)$1)->next) << std::endl;
-        ((AST_node*)$2)->prev = $1; $$ = $1; last_node = $$;
+        ((AST_node*)$2)->prev = $1; $$ = $1;
+        last_node = $$;
     }
     | var_declaration commands
     {
         //std::cout << "var_decl commands" << std::endl;
         ((AST_node*)$1)->next = $2;
         //std::cout << "NEXT: \n" << *(AST_node*)(((AST_node*)$1)->next) << std::endl;
-        ((AST_node*)$2)->prev = $1; $$ = $1; last_node = $$;
+        ((AST_node*)$2)->prev = $1; $$ = $1;
+        last_node = $$;
     }
     | var_declaration
     {
@@ -176,11 +179,25 @@ loop: LOOP_TOK condition '{' commands '}'
         ((AST_node*)$4)->prev = $$;
 
     }
+    | LOOP_TOK in_interv '{' commands '}'
+    {
+        auto a = newleaf(NT_IDENT,$1);
+        $$ = newast(NT_LOOP, {a,$2,$4});
+        ((AST_node*)$4)->prev = $$;
+    }
 
 condition: exp COMPARE_TOK exp
     {
         auto a = newleaf(NT_COMPARE, $2);
         $$ = newast(NT_COND, {a, $1, $3});
+    }
+interv: exp '.''.' exp
+    {
+        $$ = newast(NT_INTERV,{$1,$4});
+    }
+in_interv: exp IN_TOK interv
+    {
+        $$ = newast(NT_ININT,{$1,$3});
     }
 
 var_declaration: VARDECL assign ';'
@@ -206,11 +223,11 @@ assign: IDENTIFIER '=' exp
     }
     ;
 exp: factor {$$ = $1;}
-    | exp '+' factor {std::cout << "plus\n"; $$ = newast(NT_ADD, {$1, $3}); }
+    | exp '+' factor { $$ = newast(NT_ADD, {$1, $3}); }
     | exp '-' factor { $$ = newast(NT_SUB, {$1, $3}); }
     ;
 
-factor: term {$$ = $1; std::cout << "TERM\n";}
+factor: term {$$ = $1;}
     | factor '*' term { $$ = newast(NT_MUL, {$1, $3}); }
     | factor '/' term { $$ = newast(NT_DIV, {$1, $3}); }
     ;

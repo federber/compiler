@@ -5,6 +5,7 @@
 #include<vector>
 #include<iostream>
 #include<unistd.h>
+#include "ast_test.h"
 int yyparse(void);
 
 std::string input_value; // см. readme
@@ -98,6 +99,15 @@ int main() {
   std::string a;
   a = "let r=9; if a==e {a=ss; let r=p;} else {let a=c;}";
   std::cout << *get_AST(a);
+}
+*/
+/*
+int main()
+{
+    test_base();
+    test_ifelse();
+    test_for();
+    return 0;
 }
 */
 
