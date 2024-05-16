@@ -1,3 +1,0 @@
-/home/ubuntufb/ep2024spr/compiler_epr/compiler/build/CMakeFiles/Foo.dir
-/home/ubuntufb/ep2024spr/compiler_epr/compiler/build/CMakeFiles/edit_cache.dir
-/home/ubuntufb/ep2024spr/compiler_epr/compiler/build/CMakeFiles/rebuild_cache.dir

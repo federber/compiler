@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/Foo.dir/src/ast_str.o CMakeFiles/Foo.dir/create_ast.tab.o CMakeFiles/Foo.dir/lex.yy.o -o Foo  -lfl 
