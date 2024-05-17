@@ -10,14 +10,14 @@ class ObjectTreeModel : public QAbstractItemModel
 public:
     ObjectTreeModel(QObject* parent = nullptr);
     void setColumns(QStringList cols);
-    void addItem(QObject* item, const QModelIndex &parentIdx);
+    void appendItemToParent(QObject* item, int row, const QModelIndex &parentIdx);
 
 
 protected:
     QStringList _columns;
     QObject* _rootItem;
 
-    QObject* objByIndex(const QModelIndex &index) const;
+    QObject* parentObjOfIndex(const QModelIndex &index) const;
   // QAbstractItemModel interface
 public:
     virtual QModelIndex index(int row, int column, const QModelIndex &parent) const override;

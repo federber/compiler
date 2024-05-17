@@ -15,6 +15,12 @@ public:
     MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
 
+private slots:
+
+    void on_fileButton_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWidget *ui;
 };

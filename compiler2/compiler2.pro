@@ -17,12 +17,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     AST.cpp \
+    ast_str.cpp \
+    create_ast.tab.cpp \
+    lex.yy.cpp \
     main.cpp \
     mainwidget.cpp
 
 HEADERS += \
     AST.h \
-    mainwidget.h
+    ast_str.h \
+    create_ast.tab.h \
+    mainwidget.h \
+    stdarg.h
 
 FORMS += \
     mainwidget.ui
