@@ -135,6 +135,7 @@ void test_ifelse()
     AST_node* pred_res = let3;
 
     std::cout << "result: " << std::boolalpha << t.compare_nodes((AST_base*)res,(AST_base*)pred_res) <<", predicted: " << "true" << std::endl;
+    remove_ast(res);
 }
 
 void test_for(){
@@ -171,5 +172,5 @@ void test_for(){
 
     std::cout << "result: " << std::boolalpha << t.compare_nodes((AST_base*)res,(AST_base*)pred_res) <<", predicted: " << "true" << std::endl;
 
-
+    remove_ast(res);
 }

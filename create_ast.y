@@ -188,7 +188,9 @@ loop: LOOP_TOK condition '{' commands '}'
 
 condition: exp COMPARE_TOK exp
     {
-        auto a = newleaf(NT_COMPARE, $2);
+        char* ch1 = (char*)malloc(strlen($2) * sizeof(char));
+        strncpy(ch1, $2, strlen($2));
+        auto a = newleaf(NT_COMPARE, ch1);
         $$ = newast(NT_COND, {a, $1, $3});
     }
 interv: exp '.''.' exp

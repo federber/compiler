@@ -47,6 +47,9 @@ struct AST_node:public AST_base{
     AST_base* prev = nullptr; //указатель на предыд. узел (подробнее - см. readme)
     AST_base* next = nullptr; //указатель на след. узел
 };
+void remove_ast(AST_node*); // очищает память, выделенную во время формирования AST дерева.
+                            // Вызывать ТОЛЬКО при использовании функции yyparse (явном или неявном),
+                            // т.к. функции вида malloc вызываются только в этом случае
 std::ostream& operator<<(std::ostream& ost, const AST_node& nd); // выведет всё дерево начивая с узла(т.е. сам узел и дочерние ноды)
 
 AST_node *newast(int nodetype, std::vector<AST_base*> vec); // создать новый узел

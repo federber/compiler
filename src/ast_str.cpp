@@ -60,6 +60,24 @@ AST_leaf *newleaf(int nodetype, char* chr) {
 }
 
 
+void remove_ast(AST_node* inp)
+{
+    std::cout << "destruct" << std::endl;
+    AST_node* curr_node = inp;
+     for(auto& el : curr_node->subtrees){
+         if(el->nodetype <= NodeT_CONSTANT)
+            delete ((AST_leaf*)el)->value;
+     }
+     while(curr_node->next != nullptr)
+     {
+         for(auto& el : curr_node->subtrees){
+             if(el->nodetype <= NodeT_CONSTANT)
+                delete ((AST_leaf*)el)->value;
+         }
+         curr_node = (AST_node*)(curr_node->next);
+     }
+}
+
 void yyerror(char *s, ...) {
   va_list ap;
   va_start(ap, s);
@@ -93,15 +111,18 @@ AST_node* get_AST(std::string code_buffer)
     yyparse();
     return find_start_symbol((AST_node*)last_node);
 }
-/* example uf using get_AST
+/*
+ //example of using get_AST
 int main() {
   printf(">>> ");
   std::string a;
   a = "let r=9; if a==e {a=ss; let r=p;} else {let a=c;}";
-  std::cout << *get_AST(a);
+  auto res = get_AST(a);
+  std::cout << *res;
+  remove_ast(res);
 }
 */
-/*
+
 int main()
 {
     test_base();
@@ -109,6 +130,6 @@ int main()
     test_for();
     return 0;
 }
-*/
+
 
 
